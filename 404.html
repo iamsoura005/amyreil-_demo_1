@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>404 — Page Not Found · Amyreil Technologies</title>
+  <meta name="description" content="The page you're looking for might have been moved or doesn't exist. Amyreil Technologies.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #121410;
+      --olive: #4d6a10;
+      --green: #6f9a0c;
+      --lime: #b4cd52;
+      --pill: #e7efcf;
+      --line: #eef0ea;
+      --bg: #fff;
+      --foreground-80: rgba(18, 20, 16, 0.82);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      background: #f7f9f2;
+      font-family: "Inter Tight", system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Ambient Watercolor Canvas */
+    .viewport {
+      position: relative;
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, #fbfcf8 0%, #edf2e2 50%, #e2eacf 100%);
+    }
+
+    .ambient-bg {
+      position: absolute;
+      inset: -40px;
+      z-index: 0;
+      background: url("https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093215_b7826239-e451-4e15-b42b-d6bcf9497a32.png") center 70% / cover no-repeat;
+      filter: blur(28px) saturate(1.1) opacity(0.28);
+      transform: scale(1.1);
+      pointer-events: none;
+    }
+
+    /* Drifting Clouds in Top Corners */
+    .cloud {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.9;
+      will-change: transform;
+    }
+    .cloud-l {
+      width: clamp(260px, 36vw, 520px);
+      left: -6vw;
+      top: -3vh;
+      animation: floatCloudL 20s ease-in-out infinite alternate;
+    }
+    .cloud-r {
+      width: clamp(240px, 34vw, 480px);
+      right: -6vw;
+      top: 0vh;
+      animation: floatCloudR 24s ease-in-out infinite alternate;
+    }
+    @keyframes floatCloudL {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(35px, 20px); }
+    }
+    @keyframes floatCloudR {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-30px, 15px); }
+    }
+
+    /* Floating Frosted Glass Tiles */
+    .glass-tile {
+      position: absolute;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 14px 30px rgba(45, 65, 15, 0.07);
+      pointer-events: none;
+      z-index: 1;
+      animation: glassPulse 6s ease-in-out infinite alternate;
+    }
+    @keyframes glassPulse {
+      0% { transform: translateY(0) scale(1); opacity: 0.4; }
+      100% { transform: translateY(-10px) scale(1.06); opacity: 0.85; }
+    }
+
+    /* Falling Cherry Blossom Petals */
+    .petals-wrap {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .petal {
+      position: absolute;
+      top: -24px;
+      width: 12px;
+      height: 17px;
+      background: radial-gradient(circle at 35% 35%, #ffd5e3, #f8a1bd 75%, #e27197);
+      border-radius: 60% 40% 70% 30% / 60% 30% 70% 40%;
+      opacity: 0.7;
+      animation: petalFall linear infinite;
+    }
+    @keyframes petalFall {
+      0% {
+        transform: translate3d(0, -20px, 0) rotate(0deg) scale(var(--s, 1));
+        opacity: 0;
+      }
+      10% { opacity: 0.85; }
+      90% { opacity: 0.85; }
+      100% {
+        transform: translate3d(var(--dx, 80px), 105vh, 0) rotate(540deg) scale(var(--s, 1));
+        opacity: 0;
+      }
+    }
+
+    /* Top Brand Navigation */
+    .top-nav {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 7px 18px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 4px 18px rgba(40, 55, 10, 0.08);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .top-nav:hover {
+      transform: translateX(-50%) translateY(-2px);
+      box-shadow: 0 8px 24px rgba(40, 55, 10, 0.12);
+    }
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--olive);
+    }
+    .brand-mark svg {
+      width: 22px;
+      height: 16px;
+    }
+    .nav-divider {
+      width: 1px;
+      height: 14px;
+      background: rgba(77, 106, 16, 0.25);
+    }
+    .nav-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #556b20;
+    }
+
+    /* Empty Card Component (Direct translation of shadcn/ui Empty Component) */
+    .empty-container {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 32px 24px;
+      max-width: 580px;
+      width: calc(100% - 32px);
+      margin: 0 auto;
+    }
+
+    .empty-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* Giant 404 Title with Bottom Mask: mask-b-from-20% mask-b-to-80% */
+    .empty-title {
+      position: relative;
+      font-weight: 800;
+      font-size: clamp(130px, 20vw, 220px);
+      line-height: 0.85;
+      letter-spacing: -0.065em;
+      user-select: none;
+      margin: 0;
+      padding: 0;
+
+      /* Bottom mask fading from 20% to 80% */
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.05) 80%, rgba(0, 0, 0, 0) 100%);
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0.05) 80%, rgba(0, 0, 0, 0) 100%);
+
+      /* Hero section theme colors: Olive (#4d6a10) to Green (#6f9a0c) to Lime (#b4cd52) */
+      background: linear-gradient(180deg, var(--olive) 0%, var(--green) 48%, var(--lime) 95%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+
+      will-change: transform;
+      animation: float404 4.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes float404 {
+      0% {
+        transform: translateY(0);
+      }
+      100% {
+        transform: translateY(-7px);
+      }
+    }
+
+    /* EmptyDescription: -mt-8 text-nowrap text-foreground/80 */
+    .empty-description {
+      position: relative;
+      z-index: 3;
+      margin-top: clamp(-28px, -4.5vw, -46px);
+      font-size: clamp(15.5px, 1.85vw, 19px);
+      font-weight: 500;
+      line-height: 1.5;
+      letter-spacing: -0.015em;
+      color: var(--foreground-80);
+      white-space: nowrap;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
+    }
+
+    /* EmptyContent: Action Buttons Container */
+    .empty-content {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 4;
+    }
+
+    .btn-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Button styles matching shadcn/ui + Amyreil Theme */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      height: 44px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      cursor: pointer;
+      border: 1px solid transparent;
+      outline: none;
+      position: relative;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s, box-shadow 0.25s, border-color 0.25s;
+    }
+
+    /* Primary Button: Go Home */
+    .btn-primary {
+      background: var(--olive);
+      color: #f3f8e4;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 4px 14px rgba(60, 80, 10, 0.25);
+    }
+    .btn-primary:hover {
+      background: #5b7d14;
+      transform: translateY(-2px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 20px rgba(60, 80, 10, 0.32);
+    }
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    /* Outline Button: Explore */
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--olive);
+      border: 1.5px solid #c4d2aa;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(45, 60, 10, 0.06);
+    }
+    .btn-outline:hover {
+      background: var(--pill);
+      border-color: var(--green);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(45, 60, 10, 0.12);
+    }
+    .btn-outline:active {
+      transform: translateY(0);
+    }
+
+    /* Lucide Icons */
+    .size-4 {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      transition: transform 0.35s ease;
+    }
+    .btn-primary:hover .lucide-home {
+      transform: scale(1.18);
+    }
+    .btn-outline:hover .lucide-compass {
+      transform: rotate(45deg) scale(1.1);
+    }
+
+    /* Bottom Page Meta */
+    .page-footer {
+      position: absolute;
+      bottom: 22px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      font-size: 12px;
+      color: #556633;
+      z-index: 5;
+    }
+    .page-footer a:hover {
+      color: var(--olive);
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .empty-description {
+        white-space: normal;
+        margin-top: -24px;
+        padding: 0 12px;
+      }
+      .btn-group {
+        width: 100%;
+        flex-direction: column;
+      }
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="viewport">
+    <!-- Ambient Backdrop -->
+    <div class="ambient-bg"></div>
+
+    <!-- Drifting Pastel Clouds in Top Corners -->
+    <div class="cloud cloud-l">
+      <img src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093216_44218665-b15e-4566-a2d4-2676ab03609d.png" alt="Pastel cherry blossom cloud left">
+    </div>
+    <div class="cloud cloud-r">
+      <img src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20261021_093215_0f37c0c3-f82c-485b-87dd-5a35b75a8782.png" alt="Pastel cherry blossom cloud right">
+    </div>
+
+    <!-- Floating Glass Squares -->
+    <div class="glass-tile" style="width: 46px; height: 46px; top: 16%; left: 15%; animation-delay: 0.2s;"></div>
+    <div class="glass-tile" style="width: 34px; height: 34px; top: 25%; right: 18%; animation-delay: 1.4s;"></div>
+    <div class="glass-tile" style="width: 56px; height: 56px; bottom: 20%; left: 16%; animation-delay: 0.8s;"></div>
+    <div class="glass-tile" style="width: 40px; height: 40px; bottom: 24%; right: 20%; animation-delay: 2.1s;"></div>
+
+    <!-- Falling Petals Canvas -->
+    <div class="petals-wrap" id="petals"></div>
+
+    <!-- Top Navigation -->
+    <a href="index.html" class="top-nav" aria-label="Return to Amyreil Home">
+      <div class="brand-mark">
+        <svg viewBox="0 0 30 22" width="22" height="16">
+          <path d="M5 19L15 3.5L25 19M9.5 13.5h11" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="15" cy="8" r="2.2" fill="currentColor"/>
+        </svg>
+        amyreil
+      </div>
+      <div class="nav-divider"></div>
+      <span class="nav-tag">404 Not Found</span>
+    </a>
+
+    <!-- Empty State Component -->
+    <main class="empty-container" id="emptyContainer">
+      <header class="empty-header">
+        <!-- Masked Title 404 (mask-b-from-20% mask-b-to-80%) -->
+        <h1 class="empty-title" id="title404">404</h1>
+        
+        <!-- EmptyDescription: -mt-8 text-nowrap text-foreground/80 -->
+        <p class="empty-description" id="desc404">
+          The page you're looking for might have been <br />
+          moved or doesn't exist.
+        </p>
+      </header>
+
+      <!-- EmptyContent: Action Buttons Container -->
+      <div class="empty-content" id="content404">
+        <div class="btn-group">
+          <!-- Primary: Go Home with HomeIcon -->
+          <a href="index.html" class="btn btn-primary" id="btnHome">
+            <svg class="size-4 lucide-home" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" data-icon="inline-start">
+              <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            Go Home
+          </a>
+
+          <!-- Outline: Explore with CompassIcon -->
+          <a href="index.html#stats" class="btn btn-outline" id="btnExplore">
+            <svg class="size-4 lucide-compass" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" data-icon="inline-start">
+              <circle cx="12" cy="12" r="10"/>
+              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+            </svg>
+            Explore
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Page Footer -->
+    <footer class="page-footer">
+      <span>Independent Tech Agency &amp; SaaS Studio</span>
+      <span>•</span>
+      <a href="index.html#cta">Contact Support</a>
+    </footer>
+  </div>
+
+  <!-- GSAP Animation Engine -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    (function() {
+      // 1. Generate Falling Cherry Blossom Petals
+      const petalsWrap = document.getElementById('petals');
+      if (petalsWrap) {
+        for (let i = 0; i < 22; i++) {
+          const petal = document.createElement('span');
+          petal.className = 'petal';
+          const left = Math.random() * 100;
+          const dx = (Math.random() * 180 - 90).toFixed(1) + 'px';
+          const duration = (8 + Math.random() * 8).toFixed(2) + 's';
+          const delay = (-Math.random() * 12).toFixed(2) + 's';
+          const scale = (0.6 + Math.random() * 0.75).toFixed(2);
+
+          petal.style.left = left + '%';
+          petal.style.setProperty('--dx', dx);
+          petal.style.setProperty('--s', scale);
+          petal.style.animationDuration = duration;
+          petal.style.animationDelay = delay;
+          petalsWrap.appendChild(petal);
+        }
+      }
+
+      // 2. Entrance Animation via GSAP fromTo
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+      tl.fromTo('.top-nav', 
+        { y: -24, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.6 }
+      )
+      .fromTo('#title404', 
+        { y: 36, scale: 0.92, opacity: 0, filter: 'blur(10px)' }, 
+        { y: 0, scale: 1, opacity: 1, filter: 'blur(0px)', duration: 0.8, ease: 'back.out(1.4)' }, 
+        '-=0.35'
+      )
+      .fromTo('#desc404', 
+        { y: 16, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 0.6 }, 
+        '-=0.45'
+      )
+      .fromTo('.btn-group .btn', 
+        { y: 16, opacity: 0, scale: 0.92 }, 
+        { y: 0, opacity: 1, scale: 1, stagger: 0.08, duration: 0.55, ease: 'back.out(1.7)' }, 
+        '-=0.35'
+      )
+      .fromTo('.glass-tile', 
+        { scale: 0, opacity: 0 }, 
+        { scale: 1, opacity: 0.6, duration: 0.5, stagger: 0.06, ease: 'back.out(2)' }, 
+        '-=0.4'
+      )
+      .fromTo('.page-footer', 
+        { opacity: 0 }, 
+        { opacity: 1, duration: 0.5 }, 
+        '-=0.3'
+      );
+    })();
+  </script>
+</body>
+</html>
